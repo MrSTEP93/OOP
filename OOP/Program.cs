@@ -10,7 +10,9 @@ namespace m7_2
             Console.WriteLine("Hello World!");
 
             //MoveClassicCar();
-            MoveHybridCar();
+            //MoveHybridCar();
+
+            BooksAction();
 
         }
 
@@ -56,6 +58,30 @@ namespace m7_2
             //cars[1] = new HybridCar("Prius");
             //cars[2] = new Car("Vesta SW White");
 
+        }
+
+        static void BooksAction()
+        {
+            var array = new Book[]
+            {
+                new Book
+                {
+                  Name = "Мастер и Маргарита",
+                  Author = "М.А. Булгаков"
+                },
+                new Book
+                {
+                  Name = "Отцы и эти",
+                  Author = "И.С. Тургенев"
+                },
+            };
+            BookCollection collection = new BookCollection(array);
+
+            Book book1 = collection[1];
+            Console.WriteLine("Книга \"{0}\" от автора {1}", book1.Name, book1.Author);
+            
+            Book book2 = collection["маргарита"];
+            Console.WriteLine("Книга \"{0}\" от автора {1}", book2.Name, book2.Author);
         }
     }
 }
