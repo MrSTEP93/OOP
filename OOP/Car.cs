@@ -16,6 +16,7 @@ namespace m7_2
         /// <summary>
         /// Метод, указывающий на исчерпание топлива
         /// Подразумевалось, что этот метод будет вызываться для классических автомобилей текущего класса
+        /// (аналогично со строковой переменной noFuel)
         /// </summary>
         public virtual void NoFuel()
         {
@@ -84,7 +85,7 @@ namespace m7_2
         /// </summary>
         private new void NoFuel()
         {
-            Console.WriteLine("override METHOD. The current fuel is exhausted. Please, change fuel type to continue driving");
+            Console.WriteLine("new METHOD. The current fuel is exhausted. Please, change fuel type to continue driving");
         }
         private const string noFuel = "VAR. The current fuel is exhausted. Please, change fuel type to continue driving";
 
@@ -121,7 +122,7 @@ namespace m7_2
             if (result)
             {
                 //Console.WriteLine("Для объекта {0} вызван метод Move класса HybridCar", Name);
-                InternalFuelAmount[FuelType] -= 0.1M;
+                InternalFuelAmount[FuelType] = FuelAmount;
                 return result;
             } else
             {

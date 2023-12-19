@@ -39,7 +39,7 @@ namespace m7_2
             }
             newCar.Summary();
             Console.WriteLine();
-            //newCar.ChangeFuelType(FuelTypes.Gas);
+            newCar.ChangeFuelType(FuelTypes.Gas);
 
             for (int i = 0; i < 5; i++)
             {
