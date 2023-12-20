@@ -12,24 +12,27 @@ namespace m7_2
             //MoveClassicCar();
             //MoveHybridCar();
 
-            BooksAction();
+            //BooksAction();
+
+            Employee employee = new Employee("Николай", new DateTime(1988, 12, 23), true);
+            Guest guest = new Guest("Андрей", new DateTime(1993, 01, 05), new DateTime(2020, 11, 05));
 
         }
 
         private static void MoveClassicCar()
         {
-            Car myCar = new("Vesta SW Red");
+            GasCar myCar = new("Vesta SW Red");
             for (int i = 0; i < 7; i++)
             {
                 myCar.Move();
             }
-            myCar.Summary();
+            myCar.TotalInfo();
 
             for (int i = 0; i < 5; i++)
             {
                 myCar.Move();
             }
-            myCar.Summary();
+            myCar.TotalInfo();
         }
 
         private static void MoveHybridCar()
@@ -39,7 +42,7 @@ namespace m7_2
             {
                 newCar.Move();
             }
-            newCar.Summary();
+            newCar.TotalInfo();
             Console.WriteLine();
             newCar.ChangeFuelType(FuelTypes.Gas);
 
@@ -47,17 +50,7 @@ namespace m7_2
             {
                 newCar.Move();
             }
-            newCar.Summary();
-        }
-
-        private static void CheckIndexator()
-        {
-            Car[] cars = new Car[10];
-
-            cars[0] = new Car("Vesta SW Red");
-            //cars[1] = new HybridCar("Prius");
-            //cars[2] = new Car("Vesta SW White");
-
+            newCar.TotalInfo();
         }
 
         static void BooksAction()

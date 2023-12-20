@@ -7,7 +7,56 @@ using System.Threading.Tasks;
 
 namespace m7_2
 {
-    class Car
+    abstract public class Car<TEngine>  where TEngine : Engine
+        
+    {
+        public TEngine Engine;
+        public abstract bool Move();
+        public abstract void TripInfo();
+        public abstract void TotalInfo();
+
+        public abstract void ChangePart<TCarPart>(TCarPart newPart) where TCarPart : CarPart;
+    }
+
+    public class Engine
+    {
+
+    }
+
+    public class GasEngine : Engine
+    {
+
+    }
+
+    public class ElectricEngine : Engine
+    {
+
+    }
+    public class HybridEngine : Engine
+    {
+
+    }
+
+    public abstract class CarPart
+    {
+
+    }
+
+    public class Battery : CarPart
+    {
+
+    }
+
+    public class Differential : CarPart
+    {
+
+    }
+
+    public class Wheel : CarPart
+    {
+
+    }
+    class GasCar : Car<GasEngine>
     {
         public decimal FuelAmount;
         public int Mileage;
@@ -24,19 +73,19 @@ namespace m7_2
         }
         private const string noFuel = "VAR. Not enough fuel, engine stopped";
 
-        public Car(string name, decimal fuel)
+        public GasCar(string name, decimal fuel)
         {
             FuelAmount = fuel;
             Mileage = 0;
             this.Name = name;
         }
-        public Car(string name) : this(name, 1M) { }
+        public GasCar(string name) : this(name, 1M) { }
 
         /// <summary>
         /// Базовый метод Move, движение на 1 единицу расстояния
         /// </summary>
         /// <returns></returns>
-        public virtual bool Move()
+        public override bool Move()
         {
             //Console.WriteLine("Для объекта {0} вызван метод Move класса Car", Name);
             if (FuelAmount > 0.00M)
@@ -56,7 +105,7 @@ namespace m7_2
         /// <summary>
         /// Выводит инфо о поездке
         /// </summary>
-        public virtual void TripInfo()
+        public override void TripInfo()
         {
             Console.WriteLine("<< current FuelAmount = {0:0.00}, current Mileage = {1} >>", FuelAmount, Mileage);
         }
@@ -64,17 +113,24 @@ namespace m7_2
         /// <summary>
         /// Выводит общий пробег и остаток топлива
         /// </summary>
-        public virtual void Summary()
+        public override void TotalInfo()
         {
             Console.WriteLine("TOTAL FUEL AMOUNT = {0:0.00}, TOTAL MILEAGE = {1}", FuelAmount, Mileage);
         }
+
+        public override void ChangePart<TCarPart>(TCarPart newPart)
+        {
+            Console.WriteLine("Part Changed");
+        }
     }
+    
     enum FuelTypes
     {
         Gas = 0,
         Electricity
     }
-    class HybridCar : Car
+
+    class HybridCar : GasCar
     {
         public FuelTypes FuelType { get; private set; }
         public Dictionary<FuelTypes, decimal> InternalFuelAmount;
@@ -143,7 +199,7 @@ namespace m7_2
         /// <summary>
         /// Выводит общий пробег и остаток топлива (переопределен)
         /// </summary>
-        public override void Summary()
+        public override void TotalInfo()
         {
             string anotherType = "undefined";
             decimal anotherAmount = -1M;
@@ -158,5 +214,19 @@ namespace m7_2
             Console.WriteLine("Current fuel is {0}, available balance is = {1:0.00}, ", FuelType, FuelAmount);
             Console.WriteLine("Another fuel ({0}) is available {1:0.00}. TOTAL MILEAGE = {2}", anotherType, anotherAmount, Mileage);
         }
+    }
+
+    class ElectricCar : Car<ElectricEngine>
+    {
+        public override void ChangePart<TCarPart>(TCarPart newPart) { }
+
+        public override bool Move() 
+        {
+            return true;
+        }
+
+        public override void TotalInfo() { }
+
+        public override void TripInfo() { }
     }
 }
